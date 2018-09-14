@@ -2,6 +2,7 @@ package com.mxirgu.domo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -16,6 +17,7 @@ import com.mxirgu.domo.service.MyAppUserDetailsService;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled=true)
+@ComponentScan(basePackages = { "com.mxirgu.domo" })
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private MyAppUserDetailsService myAppUserDetailsService;
@@ -24,16 +26,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/user/**").hasAnyRole("ADMIN","USER")
 		.and().formLogin()  //login configuration
-                .loginPage("/customLogin.jsp")
-                .loginProcessingUrl("/appLogin")
-                .usernameParameter("app_username")
-                .passwordParameter("app_password")
-                .defaultSuccessUrl("/user/home")	
+                .loginPage("/login.jsp")
+                .loginProcessingUrl("/authenticate")
+                .usernameParameter("login")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/home")	
 		.and().logout()    //logout configuration
 		.logoutUrl("/appLogout") 
-		.logoutSuccessUrl("/customLogin.jsp")
+		.logoutSuccessUrl("/login.jsp")
 		.and().exceptionHandling() //exception handling configuration
-		.accessDeniedPage("/user/error");
+		.accessDeniedPage("/error");
 	} 	
         @Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

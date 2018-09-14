@@ -4,10 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mxirgu.domo.bean.User;
 import com.mxirgu.domo.interfaces.UserServiceInt;
@@ -26,17 +27,18 @@ public class UserController {
 	@RequestMapping(value = "/ini")
 	public String ini() {
 		logger.debug("Redirect to login page");
-		
 		return "login";
 	}
+
+	@RequestMapping(value="/authenticate")
+	public String home(ModelMap model, Authentication authentication) {
+		authentication.getPrincipal();
+		model.addAttribute("user", userService.getUserByLogin(authentication.getName()));
+ 		return "home";
+ 	}
 	
-	@RequestMapping(value = "/login")
-	public String login(User user, Model model) {
-
-		logger.debug("redirect to home page");
-		user = userService.getUserById(Integer.valueOf(0));
-		model.addAttribute("user", user.getName());
-		return "home";
-	}
-
+	@RequestMapping(value="/error")
+	public String error() {
+ 		return "access-denied";
+ 	}
 }

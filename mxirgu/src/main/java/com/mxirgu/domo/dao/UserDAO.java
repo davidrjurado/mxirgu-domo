@@ -53,12 +53,14 @@ public class UserDAO {
 		logger.info("Person loaded successfully, Person details="+p);
 		return p;
 	}
+	
 	public User getUserByLogin(String login) {
 		Session session = this.sessionFactory.getCurrentSession();		
 		User p = (User) session.load(User.class, login);
 		logger.info("Person loaded successfully, Person details="+p);
 		return p;
 	}
+	
 	public void removeUser(Integer id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		User p = (User) session.load(User.class, new Integer(id));
