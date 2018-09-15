@@ -25,17 +25,7 @@ public class UserController {
 	@Autowired(required = true)
 	private UserServiceInt userService;
 	
-	@RequestMapping(value={"/","/welcome"},method=RequestMethod.GET)
-	public String welcomePage(Model model) {
-		return "welcomePage";
-	}
-
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String adminPage(Model model) {
-		return "adminPage";
-	}
-
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value={"/","/login"}, method = RequestMethod.GET)
 	public String loginPage(Model model) {
 
 		return "loginPage";

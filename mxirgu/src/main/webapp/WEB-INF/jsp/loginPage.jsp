@@ -5,7 +5,6 @@
 <title>Login</title>
 </head>
 <body>
-    <jsp:include page="_menu.jsp" />
  	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
  	<style type="text/css">
  		body{
