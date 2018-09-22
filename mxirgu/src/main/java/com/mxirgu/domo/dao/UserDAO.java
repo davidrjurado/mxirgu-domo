@@ -43,7 +43,7 @@ public class UserDAO {
 	@SuppressWarnings("unchecked")
 	public List<User> listUsers() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<User> personsList = session.createQuery("from users").list();
+		List<User> personsList = session.createQuery("from User").list();
 		return personsList;
 	}
 
