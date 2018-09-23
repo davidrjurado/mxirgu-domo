@@ -31,16 +31,22 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
-    public ModelAndView newUser() {
-		ModelAndView mv = new ModelAndView("user/editUser","user", new User());
+	public ModelAndView newUser() {
+		ModelAndView mv = new ModelAndView("user/editUser", "user", new User());
 		return mv;
-	
-    }
+	}
+
+	@RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
+	public ModelAndView edit(@PathVariable int id) {
+		User user = userService.getUserById(new Integer(id));
+		ModelAndView mv = new ModelAndView("user/editUser", "user", user);
+		return mv;
+	}
 	
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("user") User u) {
 
-		if (u.getId() == 0) {
+		if (u.getId() == null) {
 			this.userService.addUser(u);
 		} else {
 			this.userService.updateUser(u);
@@ -51,7 +57,6 @@ public class UserController {
 
 	@RequestMapping("/removeUser/{id}")
 	public String removeUser(@PathVariable("id") int id) {
-
 		this.userService.removeUser(id);
 		return "redirect:/listUser";
 	}

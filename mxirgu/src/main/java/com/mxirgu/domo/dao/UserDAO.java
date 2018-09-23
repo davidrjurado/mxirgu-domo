@@ -49,7 +49,7 @@ public class UserDAO {
 
 	public User getUserById(Integer id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		User p = (User) session.load(User.class, id);
+		User p = (User) session.get(User.class,id);
 		return p;
 	}
 
@@ -58,7 +58,7 @@ public class UserDAO {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<User> query = builder.createQuery(User.class);
 		Root<User> root = query.from(User.class);
-		query.select(root).where(builder.equal(root.get("id"), 0l));
+		query.select(root).where(builder.equal(root.get("login"), login));
 		Query<User> q = session.createQuery(query);
 		User p = q.getSingleResult();
 		return p;

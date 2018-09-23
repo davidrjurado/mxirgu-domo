@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page session="true"%>
 
 <!doctype html>
@@ -18,35 +19,26 @@
 <body>
 
 	<div class="container-fluid">
-		<a href="${pageContext.request.contextPath}/newUser" class="btn btn-info"> <i class="fa fa-plus"></i>New</a>
-		<table class="table table-hover">
-			<thead class="thead-dark">
-				<tr>
-					<th scope="col">Id</th>
-					<th scope="col">Login</th>
-					<th scope="col">Name</th>
-					<th scope="col">Surname</th>
-					<th scope="col"></th>
-					<th scope="col"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${listUsers}" var="user">
-					<tr>
-						<th scope="row">${user.id}</th>
-						<td>${user.login}</td>
-						<td>${user.name}</td>
-						<td>${user.surname}</td>
-						<td>
-							<a href="${pageContext.request.contextPath}/editUser/${user.id}" class="btn btn-info"> <i class="fa fa-pencil"></i></a>
-						</td>
-						<td>
-							<a href="${pageContext.request.contextPath}/removeUser/${user.id}" class="btn btn-danger"> <i class="fa fa-trash-o"></i></span></a>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		<form:form method="POST" action="${pageContext.request.contextPath}/saveUser" modelAttribute="user"> 
+			<div class="form-group">
+				<label for="login">Login</label>
+    			<form:input type="text" path="login" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+    			<form:input type="password" path="password" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="login">Name</label>
+				<form:input type="text" path="name" class="form-control"/>
+    		</div>
+			<div class="form-group">
+				<label for="login">Surname</label>
+				<form:input type="text" path="surname" class="form-control"/>
+    		</div>
+    		<form:input type="hidden" path="id"/>
+			<button type="submit" class="btn btn-primary">Submit</button>
+	</form:form>   
 
 	</div>
 
