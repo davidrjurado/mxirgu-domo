@@ -21,11 +21,11 @@ public class AuditTrail {
 	private Long id;
 	private User user;
 	private Date processDate;
-	private String action;
+	private Integer action;
 	private String message;
 	private byte[] attachment;
 	private String attachmentType;
-	private String entity;
+	private Integer entity;
 	private String entityBefore;
 	private String entityAfter;
 	
@@ -51,10 +51,10 @@ public class AuditTrail {
 	public void setProcessDate(Date processDate) {
 		this.processDate = processDate;
 	}
-	public String getAction() {
+	public Integer getAction() {
 		return action;
 	}
-	public void setAction(String action) {
+	public void setAction(Integer action) {
 		this.action = action;
 	}
 	public String getMessage() {
@@ -75,10 +75,10 @@ public class AuditTrail {
 	public void setAttachmentType(String attachmentType) {
 		this.attachmentType = attachmentType;
 	}
-	public String getEntity() {
+	public Integer getEntity() {
 		return entity;
 	}
-	public void setEntity(String entity) {
+	public void setEntity(Integer entity) {
 		this.entity = entity;
 	}
 	public String getEntityBefore() {

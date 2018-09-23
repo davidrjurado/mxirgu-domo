@@ -6,11 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.stereotype.Component;
 
 @Component
 @Entity
+@XmlRootElement
 @Table(name="users")
 public class User {
 	@Id
