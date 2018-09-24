@@ -18,6 +18,7 @@ import com.mxirgu.domo.bean.AuditTrail;
 import com.mxirgu.domo.bean.AuditTrailAction;
 import com.mxirgu.domo.bean.AuditTrailEntity;
 import com.mxirgu.domo.bean.User;
+import com.mxirgu.domo.bean.UserAuthenticated;
 import com.mxirgu.domo.dao.UserDAO;
 import com.mxirgu.domo.interfaces.AuditTrailInt;
 import com.mxirgu.domo.interfaces.UserServiceInt;
@@ -40,8 +41,8 @@ public class UserService implements UserServiceInt {
 		
 			this.userDAO.addUser(u);
 			StringWriter sw = new StringWriter();
-
-			auditTrail.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+			UserAuthenticated userAuthenticated = (UserAuthenticated)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			auditTrail.setUser(new User(userAuthenticated.getId()));
 			auditTrail.setAction(AuditTrailAction.CREATE.getValue());
 			auditTrail.setProcessDate(new Date());
 			auditTrail.setEntity(AuditTrailEntity.USER.getValue());

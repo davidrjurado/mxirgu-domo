@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,7 +18,8 @@ import org.springframework.stereotype.Component;
 public class User {
 	@Id
 	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
 	private Integer id;
 	private String login;
 	private String password;
@@ -27,6 +29,10 @@ public class User {
 
 	public User() {
 
+	}
+	
+	public User(Integer id) {
+		this.id = id;
 	}
 
 	public String getRole() {
