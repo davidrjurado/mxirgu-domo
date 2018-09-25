@@ -18,32 +18,25 @@
 <body>
 
 	<div class="container-fluid">
-		<a href="${pageContext.request.contextPath}/newUser" class="btn btn-info"> <i class="fa fa-plus"></i>New</a>
-		<a href="${pageContext.request.contextPath}/listAuditTrail/1" class="btn btn-info"> <i class="fa fa-plus"></i>Audit trail</a>
+		
+		<a href="${pageContext.request.contextPath}/listUsers" class="btn btn-info"> <i class="fa fa-plus"></i>Back</a>
 		<table class="table table-hover">
 			<thead class="thead-dark">
 				<tr>
 					<th scope="col">Id</th>
-					<th scope="col">Login</th>
-					<th scope="col">Name</th>
-					<th scope="col">Surname</th>
-					<th scope="col"></th>
-					<th scope="col"></th>
+					<th scope="col">User</th>
+					<th scope="col">Action</th>
+					<th scope="col">Date</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${listUsers}" var="user">
+				<c:forEach items="${listAuditTrail}" var="audit">
 					<tr>
-						<th scope="row">${user.id}</th>
-						<td>${user.login}</td>
-						<td>${user.name}</td>
-						<td>${user.surname}</td>
-						<td>
-							<a href="${pageContext.request.contextPath}/editUser/${user.id}" class="btn btn-info"> <i class="fa fa-pencil"></i></a>
-						</td>
-						<td>
-							<a href="${pageContext.request.contextPath}/removeUser/${user.id}" class="btn btn-danger"> <i class="fa fa-trash-o"></i></span></a>
-						</td>
+						<th scope="row">${audit.id}</th>
+						<td>${audit.user.name}</td>
+						<td>${audit.action}</td>
+						<td>${audit.processDate}</td>
+						
 					</tr>
 				</c:forEach>
 			</tbody>

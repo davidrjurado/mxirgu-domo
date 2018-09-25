@@ -47,7 +47,7 @@ public class UserService implements UserServiceInt {
 			auditTrail.setProcessDate(new Date());
 			auditTrail.setEntity(AuditTrailEntity.USER.getValue());
 
-			JAXBContext contexto = JAXBContext.newInstance(u.getClass());
+			JAXBContext contexto = JAXBContext.newInstance(User.class);
 			Marshaller marshaller = contexto.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			marshaller.marshal(u,sw);

@@ -3,9 +3,8 @@ package com.mxirgu.domo.bean;
 import java.util.Collection;
 
 import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Component;
 
-@Component
+
 public class UserAuthenticated extends User {
 
 	private static final long serialVersionUID = 6162269945826320532L;
@@ -15,9 +14,7 @@ public class UserAuthenticated extends User {
 			boolean credentialsNonExpired, boolean accountNonLocked, Collection authorities, Integer id) {
 
 		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
-
 		this.id = id;
-
 	}
 
 	public Integer getId() {

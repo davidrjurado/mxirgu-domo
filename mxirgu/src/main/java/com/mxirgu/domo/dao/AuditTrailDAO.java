@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mxirgu.domo.bean.AuditTrail;
+import com.mxirgu.domo.bean.AuditTrailEntity;
 
 @Repository
 @Transactional
@@ -22,11 +23,11 @@ public class AuditTrailDAO {
 
 	public void addAuditTrail(AuditTrail a) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(a);
+		session.merge(a);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<AuditTrail> getAudiTrailByEntity(String entity) {
+	public List<AuditTrail> getAudiTrailByEntity(AuditTrailEntity entity) {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<AuditTrail> auditList = session.createQuery("from AuditTrail").list();
 		return auditList;
