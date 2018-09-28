@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mxirgu.domo.bean.AuditTrailEntity;
-import com.mxirgu.domo.service.AuditTrailService;
+import com.mxirgu.domo.interfaces.AuditTrailInt;
 
 @Controller
 @Scope("request")
@@ -20,7 +20,7 @@ public class AuditTrailController {
 	private static final Logger logger = LoggerFactory.getLogger(AuditTrailController.class);
 
 	@Autowired
-	private AuditTrailService auditTrailService;
+	private AuditTrailInt auditTrailService;
 		
 	@RequestMapping(value = "/listAuditTrail/{entity}", method = RequestMethod.GET)
 	public String auditTrailList(@PathVariable int entity, Model model) {

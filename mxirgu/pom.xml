@@ -8,7 +8,6 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>myproject Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-
 	<properties>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<jackson.version>1.9.13</jackson.version>
@@ -186,6 +185,11 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.3.0.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+			<version>5.3.0.Final</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
@@ -212,7 +216,7 @@
 			<artifactId>jaxws-api</artifactId>
 			<version>2.2.6</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-core</artifactId>
@@ -230,9 +234,9 @@
 				<configuration>
 					<source>${java-version}</source>
 					<target>${java-version}</target>
-					<compilerArgument>-Xlint:all</compilerArgument>
-					<showWarnings>true</showWarnings>
-					<showDeprecation>true</showDeprecation>
+					<compilerArguments>
+						<processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+					</compilerArguments>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -242,6 +246,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+			
 		</plugins>
 	</build>
 

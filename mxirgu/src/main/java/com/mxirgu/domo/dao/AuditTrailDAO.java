@@ -23,7 +23,7 @@ public class AuditTrailDAO {
 
 	public void addAuditTrail(AuditTrail a) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.merge(a);
+		session.save(a);
 	}
 	
 	@SuppressWarnings("unchecked")

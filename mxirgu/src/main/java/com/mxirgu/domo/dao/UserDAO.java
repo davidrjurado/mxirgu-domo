@@ -16,6 +16,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mxirgu.domo.bean.User;
+import com.mxirgu.domo.bean.User_;
+import com.mxirgu.domo.bean.list.ListCriteria;
+import com.mxirgu.domo.bean.list.ListSort;
 
 @Repository
 @Transactional
@@ -41,15 +44,26 @@ public class UserDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<User> listUsers() {
+	public List<User> listUsers(ListCriteria listConfiguration) {
+
 		Session session = this.sessionFactory.getCurrentSession();
-		List<User> personsList = session.createQuery("from User").list();
+		// Sort criterion
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+		Root<User> root = cq.from(User.class);
+		if(listConfiguration.getSortDirection() == ListSort.DESC.getValue()) {
+			cq.orderBy(cb.desc(root.get(listConfiguration.getSortBy())));
+		} else {
+			cq.orderBy(cb.asc(root.get(listConfiguration.getSortBy())));
+		}
+		
+		List<User> personsList = session.createQuery(cq).getResultList();
 		return personsList;
 	}
 
 	public User getUserById(Integer id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		User p = (User) session.get(User.class,id);
+		User p = (User) session.get(User.class, id);
 		return p;
 	}
 

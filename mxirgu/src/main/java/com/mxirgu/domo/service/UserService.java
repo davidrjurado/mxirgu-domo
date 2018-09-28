@@ -19,6 +19,7 @@ import com.mxirgu.domo.bean.AuditTrailAction;
 import com.mxirgu.domo.bean.AuditTrailEntity;
 import com.mxirgu.domo.bean.User;
 import com.mxirgu.domo.bean.UserAuthenticated;
+import com.mxirgu.domo.bean.list.ListCriteria;
 import com.mxirgu.domo.dao.UserDAO;
 import com.mxirgu.domo.interfaces.AuditTrailInt;
 import com.mxirgu.domo.interfaces.UserServiceInt;
@@ -68,8 +69,8 @@ public class UserService implements UserServiceInt {
 
 	@Override
 	@Transactional
-	public List<User> listUsers() {
-		return this.userDAO.listUsers();
+	public List<User> listUsers(ListCriteria listConfiguration) {
+		return this.userDAO.listUsers(listConfiguration);
 	}
 
 	@Override

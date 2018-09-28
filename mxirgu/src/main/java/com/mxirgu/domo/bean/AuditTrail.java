@@ -2,9 +2,9 @@ package com.mxirgu.domo.bean;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,8 +24,8 @@ public class AuditTrail {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
 	private Long id;
-	@JoinColumn(name = "idUser", unique = true)
-    @OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idUser")
+	@OneToOne(fetch = FetchType.EAGER, optional = true)
 	private User user;
 	private Date processDate;
 	private Integer action;

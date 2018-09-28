@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.mxirgu.domo.bean.User;
+import com.mxirgu.domo.bean.list.ListCriteria;
 
 @Service
 public interface UserServiceInt {
@@ -13,7 +14,7 @@ public interface UserServiceInt {
 
 	public void updateUser(User u);
 
-	public List<User> listUsers();
+	public List<User> listUsers(ListCriteria listConfiguration);
 
 	public User getUserById(Integer id);
 	

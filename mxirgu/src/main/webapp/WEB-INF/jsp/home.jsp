@@ -7,6 +7,6 @@
 </head>
 <body>
     <h3>Welcome</h3>
- 	<a href="${pageContext.request.contextPath}/listUser" >User list</a>  
+
 </body>
 </html>

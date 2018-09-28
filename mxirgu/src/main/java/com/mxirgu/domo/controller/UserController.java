@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mxirgu.domo.bean.User;
+import com.mxirgu.domo.bean.User_;
+import com.mxirgu.domo.bean.list.ListCriteria;
+import com.mxirgu.domo.bean.list.ListSort;
 import com.mxirgu.domo.interfaces.UserServiceInt;
 
 @Controller
@@ -23,10 +26,24 @@ public class UserController {
 
 	@Autowired
 	private UserServiceInt userService;
+	@Autowired
+	private ListCriteria listConfiguration;
 
 	@RequestMapping(value = "/listUser", method = RequestMethod.GET)
 	public String userList(Model model) {
-		model.addAttribute("listUsers", this.userService.listUsers());
+		
+		listConfiguration.setSortBy(User_.ID);
+		listConfiguration.setSortDirection(ListSort.ASC.getValue());
+		
+		model.addAttribute(listConfiguration);
+		model.addAttribute("listUsers", this.userService.listUsers(listConfiguration));
+		return "user/listUser";
+	}
+	
+	@RequestMapping(value = "/listUser", method = RequestMethod.POST)
+	public String userList(Model model, @ModelAttribute("listConfiguration") ListCriteria listConfiguration) {
+		
+		model.addAttribute("listUsers", this.userService.listUsers(listConfiguration));
 		return "user/listUser";
 	}
 

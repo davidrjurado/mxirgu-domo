@@ -19,7 +19,7 @@
 
 	<div class="container-fluid">
 		
-		<a href="${pageContext.request.contextPath}/listUsers" class="btn btn-info"> <i class="fa fa-plus"></i>Back</a>
+		<a href="${pageContext.request.contextPath}/listUser" class="btn btn-info"> <i class="fa fa-plus"></i>Back</a>
 		<table class="table table-hover">
 			<thead class="thead-dark">
 				<tr>
