@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mxirgu.domo.bean.User;
 import com.mxirgu.domo.bean.User_;
+import com.mxirgu.domo.bean.list.ListConfiguration;
 import com.mxirgu.domo.bean.list.ListCriteria;
 import com.mxirgu.domo.bean.list.ListSort;
 import com.mxirgu.domo.interfaces.UserServiceInt;
@@ -27,23 +28,28 @@ public class UserController {
 	@Autowired
 	private UserServiceInt userService;
 	@Autowired
-	private ListCriteria listConfiguration;
-
+	private ListCriteria listCriteria;
+	@Autowired
+	private ListConfiguration listConfiguration;
+	
 	@RequestMapping(value = "/listUser", method = RequestMethod.GET)
 	public String userList(Model model) {
 		
-		listConfiguration.setSortBy(User_.ID);
-		listConfiguration.setSortDirection(ListSort.ASC.getValue());
-		
+		listCriteria.setSortBy(User_.ID);
+		listCriteria.setSortDirection(ListSort.ASC.getValue());
+		listConfiguration = User.listConfiguration();
+		model.addAttribute(listCriteria);
 		model.addAttribute(listConfiguration);
-		model.addAttribute("listUsers", this.userService.listUsers(listConfiguration));
+		model.addAttribute("listUsers", this.userService.listUsers(listCriteria));
 		return "user/listUser";
 	}
 	
 	@RequestMapping(value = "/listUser", method = RequestMethod.POST)
-	public String userList(Model model, @ModelAttribute("listConfiguration") ListCriteria listConfiguration) {
-		
-		model.addAttribute("listUsers", this.userService.listUsers(listConfiguration));
+	public String userList(Model model, @ModelAttribute("listCriteria") ListCriteria listCriteria) {
+		model.addAttribute(listCriteria);
+		listConfiguration = User.listConfiguration();
+		model.addAttribute(listConfiguration);
+		model.addAttribute("listUsers", this.userService.listUsers(listCriteria));
 		return "user/listUser";
 	}
 

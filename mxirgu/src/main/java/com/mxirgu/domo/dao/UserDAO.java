@@ -43,18 +43,17 @@ public class UserDAO {
 
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<User> listUsers(ListCriteria listConfiguration) {
+	public List<User> listUsers(ListCriteria listCriteria) {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		// Sort criterion
 		CriteriaBuilder cb = session.getCriteriaBuilder();
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
 		Root<User> root = cq.from(User.class);
-		if(listConfiguration.getSortDirection() == ListSort.DESC.getValue()) {
-			cq.orderBy(cb.desc(root.get(listConfiguration.getSortBy())));
+		if(listCriteria.getSortDirection() == ListSort.DESC.getValue()) {
+			cq.orderBy(cb.desc(root.get(listCriteria.getSortBy())));
 		} else {
-			cq.orderBy(cb.asc(root.get(listConfiguration.getSortBy())));
+			cq.orderBy(cb.asc(root.get(listCriteria.getSortBy())));
 		}
 		
 		List<User> personsList = session.createQuery(cq).getResultList();

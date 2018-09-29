@@ -1,5 +1,7 @@
 package com.mxirgu.domo.bean;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.stereotype.Component;
+
+import com.mxirgu.domo.bean.list.ListColumn;
+import com.mxirgu.domo.bean.list.ListConfiguration;
 
 @Component
 @Entity
@@ -81,6 +86,21 @@ public class User {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
+	}
+	
+	public static ListConfiguration listConfiguration () {
+		
+		ListConfiguration listConfiguration = new ListConfiguration();
+		
+		ArrayList<ListColumn> columns = new ArrayList<ListColumn>();
+		columns.add(new ListColumn("ID", User_.ID, Boolean.TRUE, Boolean.FALSE));
+		columns.add(new ListColumn("Name", User_.NAME, Boolean.TRUE, Boolean.FALSE));
+		columns.add(new ListColumn("Surname", User_.SURNAME, Boolean.TRUE, Boolean.FALSE));
+		columns.add(new ListColumn("Login", User_.LOGIN, Boolean.TRUE, Boolean.FALSE));
+				
+		listConfiguration.setColumnsList(columns);
+		
+		return listConfiguration;
 	}
 
 }

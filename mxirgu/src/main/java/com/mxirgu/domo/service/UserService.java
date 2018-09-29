@@ -69,8 +69,8 @@ public class UserService implements UserServiceInt {
 
 	@Override
 	@Transactional
-	public List<User> listUsers(ListCriteria listConfiguration) {
-		return this.userDAO.listUsers(listConfiguration);
+	public List<User> listUsers(ListCriteria listCriteria) {
+		return this.userDAO.listUsers(listCriteria);
 	}
 
 	@Override
