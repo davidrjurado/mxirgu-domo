@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.stereotype.Component;
 
+import com.mxirgu.domo.bean.list.ListAction;
+import com.mxirgu.domo.bean.list.ListButton;
 import com.mxirgu.domo.bean.list.ListColumn;
 import com.mxirgu.domo.bean.list.ListConfiguration;
 
@@ -92,11 +94,20 @@ public class User {
 		
 		ListConfiguration listConfiguration = new ListConfiguration();
 		
+		ArrayList<ListButton> buttons = new ArrayList<ListButton>();
+		buttons.add(new ListButton(ListAction.NEW,"/newUser"));
+		buttons.add(new ListButton(ListAction.AUDITTRAIL,"/listAuditTrail"));
+		listConfiguration.setButtonList(buttons);
+		
 		ArrayList<ListColumn> columns = new ArrayList<ListColumn>();
 		columns.add(new ListColumn("ID", User_.ID, Boolean.TRUE, Boolean.FALSE));
 		columns.add(new ListColumn("Name", User_.NAME, Boolean.TRUE, Boolean.FALSE));
 		columns.add(new ListColumn("Surname", User_.SURNAME, Boolean.TRUE, Boolean.FALSE));
 		columns.add(new ListColumn("Login", User_.LOGIN, Boolean.TRUE, Boolean.FALSE));
+		//Edit action
+		columns.add(new ListColumn(null, null, Boolean.FALSE, Boolean.FALSE));
+		//Delete action
+		columns.add(new ListColumn(null, null, Boolean.FALSE, Boolean.FALSE));
 				
 		listConfiguration.setColumnsList(columns);
 		

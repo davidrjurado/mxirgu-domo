@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ListConfiguration {
 	
+	private ArrayList<ListButton> buttonList;
 	private ArrayList<ListColumn> columnsList;
 	
 	
@@ -22,6 +23,16 @@ public class ListConfiguration {
 
 	public void setColumnsList(ArrayList<ListColumn> columnsList) {
 		this.columnsList = columnsList;
+	}
+
+
+	public ArrayList<ListButton> getButtonList() {
+		return buttonList;
+	}
+
+
+	public void setButtonList(ArrayList<ListButton> buttonList) {
+		this.buttonList = buttonList;
 	}
 	
 	
