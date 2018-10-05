@@ -6,13 +6,22 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ListConfiguration {
-	
+	private String entity;
 	private ArrayList<ListButton> buttonList;
 	private ArrayList<ListColumn> columnsList;
 	
-	
 	public ListConfiguration() {
 		
+	}
+
+
+	public String getEntity() {
+		return entity;
+	}
+
+
+	public void setEntity(String entity) {
+		this.entity = entity;
 	}
 
 

@@ -1,6 +1,7 @@
 package com.mxirgu.domo.service;
 
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +21,7 @@ import com.mxirgu.domo.bean.AuditTrailAction;
 import com.mxirgu.domo.bean.AuditTrailEntity;
 import com.mxirgu.domo.bean.User;
 import com.mxirgu.domo.bean.UserAuthenticated;
+import com.mxirgu.domo.bean.list.ListCell;
 import com.mxirgu.domo.bean.list.ListCriteria;
 import com.mxirgu.domo.dao.UserDAO;
 import com.mxirgu.domo.interfaces.AuditTrailInt;
@@ -69,8 +72,37 @@ public class UserService implements UserServiceInt {
 
 	@Override
 	@Transactional
-	public List<User> listUsers(ListCriteria listCriteria) {
-		return this.userDAO.listUsers(listCriteria);
+	public ArrayList<ArrayList<ListCell>> listUsers(ListCriteria listCriteria) {
+		
+		ArrayList<ArrayList<ListCell>> rows = new ArrayList<ArrayList<ListCell>>();
+		List<User> users = this.userDAO.listUsers(listCriteria);
+		
+		for(User user : users) {
+			rows.add(user.listRow());
+		}
+		return rows;
+	}
+	
+	@Override
+	@Transactional
+	public ArrayList<Pair<String, String>> getValuesByColumn (String column){
+		
+		List<String> filters = this.userDAO.getValuesByColumn(column);
+		ArrayList<Pair<String, String>> filtersColumn = new ArrayList<Pair<String, String>>();
+		
+		String filterBy = null;
+		for (Object filter : filters) {
+			
+			if (filter instanceof Integer) {
+				filterBy = ((Integer)filter).toString();
+			} else {
+				filterBy = filter.toString();
+			}
+				
+			Pair<String, String> pair = new Pair<String, String>(filterBy, filterBy);
+			filtersColumn.add(pair);
+		}
+		return filtersColumn;
 	}
 
 	@Override

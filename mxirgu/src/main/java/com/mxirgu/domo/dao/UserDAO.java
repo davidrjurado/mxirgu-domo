@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mxirgu.domo.bean.User;
-import com.mxirgu.domo.bean.User_;
 import com.mxirgu.domo.bean.list.ListCriteria;
 import com.mxirgu.domo.bean.list.ListSort;
 
@@ -59,6 +58,19 @@ public class UserDAO {
 		List<User> personsList = session.createQuery(cq).getResultList();
 		return personsList;
 	}
+	
+	public List<String> getValuesByColumn(String column) {
+		Session session = this.sessionFactory.getCurrentSession();
+		StringBuilder query = new StringBuilder("SELECT distinct ");
+		query.append(column);
+		query.append(" from User");
+		
+		Query filters = session.createQuery(query.toString());
+		List<String> list = filters.list();
+		
+		return list;
+	}
+	
 
 	public User getUserById(Integer id) {
 		Session session = this.sessionFactory.getCurrentSession();

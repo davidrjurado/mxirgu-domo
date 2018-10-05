@@ -12,61 +12,94 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Home</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-	<script src="https://use.fontawesome.com/012315d209.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <style type="text/css">
 
 .banner {
 	color:white;
-	background: #a7a7a7;
-	height: 80px;
+	background: #363636;
+	height: 50px;
 }
-.footer {
-	color:white;
-	background: #a7a7a7;
-	height: 20px;
+
+.tabs .tab-pane{
+  margin-left:30px;
+}
+
+.tabs h3{
+  font-size:20px;
+  margin-top:10px;
+  margin-bottom:60px;
+}
+
+.tabs p{
+  font-size:14px;
+}
+
+.tabs a{
+  font-size:15px;
+  font-family:OpenSans,sans-serif;
+  font-weight:700;
+  color:#fff;
+  padding:30px;
+}
+
+.tabs li{
+  background-color:#f2f2f2;
+  text-align:center;
+  height:110px;
+  width:110px;
+  padding-top:45px;
+  list-style-position:inside;
+  border-right: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+ }
+
+.tabs li.active{
+  background-color:#777777;
 }
 
 </style>
+<script type="text/javascript">
+$(function() {
+	var $a = $(".tabs li");
+	$a.click(function() {
+		$a.removeClass("active");
+		$(this).addClass("active");
+	});
+});
+</script>
 </head>
 <body>
-	<div class="container-fluid">
-	 	<div class="row banner">
-	 		<h1> Middleware</h1>
+<div class="tabs">
+	<div class="container-fluid" style="background-color: #f2f2f2;">
+		<div class="row banner">
+	 		<h1 style="margin: 2px;"> Middleware</h1>
 	 	</div>
-	 	<div class="row">
-		 	<div class="col-2">
-		 		<nav class="nav flex-column">
-				  <a class="nav-link active" href="#">User</a>
-				  <a class="nav-link" href="#">Profiles</a>
-				  <a class="nav-link" href="#">Setting</a>
-				  <a class="nav-link disabled" href="#">Disabled</a>
-				</nav>
+		<div class="row" align="left">
+			<div class="col-1" style="padding-left: 0; padding-right: 0">
+				<ul class="nav nav-pills nav-stacked flex-column">
+					<li class="active"><a href="#tab_a" data-toggle="pill">TAB 1</a></li>
+					<li><a href="#tab_b" data-toggle="pill">TAB 2</a></li>
+					<li><a href="#tab_c" data-toggle="pill">TAB 3</a></li>
+				</ul>
 			</div>
-			<div class="col-10">
-				<iframe src="${pageContext.request.contextPath}/listUser" width="100%" height="450px" style=" border: 0">
-					Application cannot be displayed on your browser :(
-				</iframe>
-			</div>	
-	 	</div>
-		<div class="row footer">
-	 		<!-- Footer -->
-	 	</div>
+			<div class="col-11">
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab_a">
+						<iframe src="${pageContext.request.contextPath}/listUser" width="100%" height="520px" style="border:0">
+			            	The application cannot be displayed  in your browser :(
+			            </iframe>
+					</div>
+					
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-		crossorigin="anonymous"></script>
-</body>
+
+	</body>
 </html>
