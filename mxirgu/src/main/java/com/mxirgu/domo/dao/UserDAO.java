@@ -6,6 +6,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -49,28 +50,44 @@ public class UserDAO {
 		CriteriaBuilder cb = session.getCriteriaBuilder();
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
 		Root<User> root = cq.from(User.class);
-		if(listCriteria.getSortDirection() == ListSort.DESC.getValue()) {
+		if (listCriteria.getSortDirection() == ListSort.DESC.getValue()) {
 			cq.orderBy(cb.desc(root.get(listCriteria.getSortBy())));
 		} else {
 			cq.orderBy(cb.asc(root.get(listCriteria.getSortBy())));
 		}
 		
-		List<User> personsList = session.createQuery(cq).getResultList();
+		Query query = session.createQuery(cq);
+		query.setFirstResult((listCriteria.getPageNumber() - 1) * listCriteria.getRecordsDisplayed());
+		query.setMaxResults(listCriteria.getRecordsDisplayed());
+		List<User> personsList = query.getResultList();
 		return personsList;
 	}
 	
+	public Integer countUsers(ListCriteria listCriteria) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<User> query = builder.createQuery(User.class);
+		
+		Root<User> root = query.from(User.class);
+		Query<User> q = session.createQuery(query);
+		return new Integer(q.getResultList().size());
+		
+	}
+	
+	
+
 	public List<String> getValuesByColumn(String column) {
 		Session session = this.sessionFactory.getCurrentSession();
 		StringBuilder query = new StringBuilder("SELECT distinct ");
 		query.append(column);
 		query.append(" from User");
-		
+
 		Query filters = session.createQuery(query.toString());
 		List<String> list = filters.list();
-		
+
 		return list;
 	}
-	
 
 	public User getUserById(Integer id) {
 		Session session = this.sessionFactory.getCurrentSession();
@@ -82,6 +99,7 @@ public class UserDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<User> query = builder.createQuery(User.class);
+		
 		Root<User> root = query.from(User.class);
 		query.select(root).where(builder.equal(root.get("login"), login));
 		Query<User> q = session.createQuery(query);

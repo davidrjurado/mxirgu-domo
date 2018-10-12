@@ -23,6 +23,7 @@ import com.mxirgu.domo.bean.User;
 import com.mxirgu.domo.bean.UserAuthenticated;
 import com.mxirgu.domo.bean.list.ListCell;
 import com.mxirgu.domo.bean.list.ListCriteria;
+import com.mxirgu.domo.bean.list.ListData;
 import com.mxirgu.domo.dao.UserDAO;
 import com.mxirgu.domo.interfaces.AuditTrailInt;
 import com.mxirgu.domo.interfaces.UserServiceInt;
@@ -37,6 +38,8 @@ public class UserService implements UserServiceInt {
 	private AuditTrailInt auditTrailInt;
 	@Autowired
 	private AuditTrail auditTrail;
+	@Autowired
+	private ListData listData;
 
 	@Override
 	@Transactional
@@ -72,7 +75,7 @@ public class UserService implements UserServiceInt {
 
 	@Override
 	@Transactional
-	public ArrayList<ArrayList<ListCell>> listUsers(ListCriteria listCriteria) {
+	public ListData listUsers(ListCriteria listCriteria) {
 		
 		ArrayList<ArrayList<ListCell>> rows = new ArrayList<ArrayList<ListCell>>();
 		List<User> users = this.userDAO.listUsers(listCriteria);
@@ -80,7 +83,27 @@ public class UserService implements UserServiceInt {
 		for(User user : users) {
 			rows.add(user.listRow());
 		}
-		return rows;
+		listData.setRecordList(rows);
+		Integer total = this.userDAO.countUsers(listCriteria);
+		listData.setTotalRecord(total);
+		
+		Integer pages = total/listCriteria.getRecordsDisplayed();
+		listData.setPages(pages);
+		
+		if (listCriteria.getPageNumber() == 1) {
+			listData.setFrom(1);	
+		} else {
+			listData.setFrom((listCriteria.getPageNumber() -1) * listCriteria.getRecordsDisplayed());
+		}
+				
+		if (users.size() < listCriteria.getRecordsDisplayed()) {
+			listData.setTo(users.size());
+		} else {
+			listData.setTo(listCriteria.getPageNumber() * listCriteria.getRecordsDisplayed());
+		}
+		
+		
+		return listData;
 	}
 	
 	@Override

@@ -42,16 +42,16 @@
   font-size:15px;
   font-family:OpenSans,sans-serif;
   font-weight:700;
-  color:#fff;
+  color:#787878;
   padding:30px;
 }
 
 .tabs li{
   background-color:#f2f2f2;
   text-align:center;
-  height:110px;
+  height:90px;
   width:110px;
-  padding-top:45px;
+  padding-top:35px;
   list-style-position:inside;
   border-right: 1px solid #e2e2e2;
   border-bottom: 1px solid #e2e2e2;
@@ -60,7 +60,10 @@
 .tabs li.active{
   background-color:#777777;
 }
+.tabs li.active a{
 
+  color:#ffffff;
+}
 </style>
 <script type="text/javascript">
 $(function() {
@@ -76,7 +79,18 @@ $(function() {
 <div class="tabs">
 	<div class="container-fluid" style="background-color: #f2f2f2;">
 		<div class="row banner">
-	 		<h1 style="margin: 2px;"> Middleware</h1>
+			<div class="col-1" style="background-color: #1d1d1d">
+				
+			</div>
+			<div class="col-2" style="background-color: #1d1d1d">
+				<h1 style="margin: 2px;"> Company</h1>
+			</div>
+			<div class="col-7">
+	 			
+	 		</div>
+	 		<div class="col-2">
+	 			David
+	 		</div>
 	 	</div>
 		<div class="row" align="left">
 			<div class="col-1" style="padding-left: 0; padding-right: 0">
@@ -84,12 +98,14 @@ $(function() {
 					<li class="active"><a href="#tab_a" data-toggle="pill">TAB 1</a></li>
 					<li><a href="#tab_b" data-toggle="pill">TAB 2</a></li>
 					<li><a href="#tab_c" data-toggle="pill">TAB 3</a></li>
+					<li><a href="#tab_c" data-toggle="pill">TAB 3</a></li>
+					<li><a href="#tab_c" data-toggle="pill">TAB 3</a></li>
 				</ul>
 			</div>
 			<div class="col-11">
 				<div class="tab-content">
 					<div class="tab-pane active" id="tab_a">
-						<iframe src="${pageContext.request.contextPath}/listUser" width="100%" height="520px" style="border:0">
+						<iframe src="${pageContext.request.contextPath}/listUser" width="100%" height="520px" style="border:0" allowtransparency="true">
 			            	The application cannot be displayed  in your browser :(
 			            </iframe>
 					</div>

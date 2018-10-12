@@ -37,10 +37,13 @@ public class UserController {
 		
 		listCriteria.setSortBy(User_.ID);
 		listCriteria.setSortDirection(ListSort.ASC.getValue());
+		listCriteria.setPageNumber(1);
+		listCriteria.setRecordsDisplayed(10);
+		
 		listConfiguration = User.listConfiguration();
 		model.addAttribute(listCriteria);
 		model.addAttribute(listConfiguration);
-		model.addAttribute("listUsers", this.userService.listUsers(listCriteria));
+		model.addAttribute("listData", this.userService.listUsers(listCriteria));
 		return "user/listUser";
 	}
 	
@@ -49,7 +52,7 @@ public class UserController {
 		model.addAttribute(listCriteria);
 		listConfiguration = User.listConfiguration();
 		model.addAttribute(listConfiguration);
-		model.addAttribute("listUsers", this.userService.listUsers(listCriteria));
+		model.addAttribute("listData", this.userService.listUsers(listCriteria));
 		return "user/listUser";
 	}
 

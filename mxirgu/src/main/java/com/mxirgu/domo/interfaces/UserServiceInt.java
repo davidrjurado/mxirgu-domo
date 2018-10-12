@@ -1,14 +1,13 @@
 package com.mxirgu.domo.interfaces;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.javatuples.Pair;
 import org.springframework.stereotype.Service;
 
 import com.mxirgu.domo.bean.User;
-import com.mxirgu.domo.bean.list.ListCell;
 import com.mxirgu.domo.bean.list.ListCriteria;
+import com.mxirgu.domo.bean.list.ListData;
 
 @Service
 public interface UserServiceInt {
@@ -17,7 +16,7 @@ public interface UserServiceInt {
 
 	public void updateUser(User u);
 
-	public ArrayList<ArrayList<ListCell>> listUsers(ListCriteria listConfiguration);
+	public ListData listUsers(ListCriteria listConfiguration);
 
 	public User getUserById(Integer id);
 	

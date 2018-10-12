@@ -16,6 +16,25 @@ public class ListCriteria {
 	private String searchCondition;
 	private String searchValue;
 	
+	//Records
+	private int recordsDisplayed;
+	
+	//Page
+	private int pageNumber;
+	
+	
+	public int getRecordsDisplayed() {
+		return recordsDisplayed;
+	}
+	public void setRecordsDisplayed(int recordsDisplayed) {
+		this.recordsDisplayed = recordsDisplayed;
+	}
+	public int getPageNumber() {
+		return pageNumber;
+	}
+	public void setPageNumber(int pageNumber) {
+		this.pageNumber = pageNumber;
+	}
 	public String getSortBy() {
 		return sortBy;
 	}
